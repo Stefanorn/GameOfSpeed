@@ -16,6 +16,7 @@ namespace TheGameOfSpeed
         public static int minSpeed = 50;
         public static int maxSpeed = 100;
         public static bool faultyBreak = false;
+        public static System.Media.SoundPlayer player = null;
 
 
         static void Main(string[] args)
@@ -123,7 +124,7 @@ namespace TheGameOfSpeed
         private static void Event()
         {
 
-            int random = r.Next(10);
+            int random = r.Next(20);
 
             if (random == 0)
             {
@@ -148,6 +149,8 @@ namespace TheGameOfSpeed
             }
             else if (random == 4)
             {
+                player = new System.Media.SoundPlayer("DragonSound.wav");
+                player.Play();
                 Console.WriteLine("A DRAGON APROCHES!!! \n DRIVE DRIVE DRIVE !!!");
                 maxSpeed = speed + 100;
                 minSpeed = speed - 1;
@@ -166,7 +169,11 @@ namespace TheGameOfSpeed
 
 
         static void EndGame()
+
         {
+            player = new System.Media.SoundPlayer("crash.wav");
+            player.Play();
+            
             for (int i = 0; i < 3; i++)
             {
                 Console.BackgroundColor = ConsoleColor.Red;
@@ -177,8 +184,7 @@ namespace TheGameOfSpeed
                 System.Threading.Thread.Sleep(200);
             }
 
-            System.Media.SoundPlayer player = new System.Media.SoundPlayer("crash.wav");
-            player.Play();
+
 
             Console.ForegroundColor = ConsoleColor.Red;
             Console.SetCursorPosition(35, 10);
